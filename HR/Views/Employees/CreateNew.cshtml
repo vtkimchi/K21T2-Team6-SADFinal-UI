@@ -1,0 +1,46 @@
+﻿@model HR.Models.Employees
+@{
+    ViewBag.Title = "CreateNew";
+}
+
+<style>
+    span.field-validation-error {
+        color: red;
+    }
+</style>
+
+<div style="max-width:600px;">
+    @using (Html.BeginForm("CreateNew", "Employees", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @if (ViewBag.Result != null)
+            {
+                <div style="color:red">@ViewBag.Result</div>
+            }
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(a => a.Name)
+            @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Department)
+            @Html.TextBoxFor(a => a.Department, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Department)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Salary)
+            @Html.TextBoxFor(a => a.Salary, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Salary)
+        </div>
+
+        <input type="submit" value="Create" class="btn btn-default" />
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
