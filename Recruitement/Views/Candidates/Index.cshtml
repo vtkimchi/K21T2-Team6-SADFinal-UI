@@ -28,6 +28,9 @@
                         <td>@p.Name</td>
                         <td>@p.Phone</td>
                         <td>@p.Birthday</td>
+                        <td>
+                            <form action="~/Candidates/CreateNew/@p.Name" method="post"> <input type="submit" value="Pass"/></form>
+                        </td>
                     </tr>
 
                 }

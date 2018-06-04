@@ -30,5 +30,30 @@ namespace Recruitement.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult CreateNew(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                HttpClient client = new HttpClient();
+                Candidates nCandi = new Candidates();
+                nCandi.Name = id;
+                var result = client.PostAsJsonAsync("http://localhost:24528/api/Candidates/CreateNew/", nCandi).Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    ViewBag.Result = "Successfully saved!";
+                    ModelState.Clear();
+                    return RedirectToAction("Index", "Candidates");
+                }
+                else
+                {
+                    ModelState.Clear();
+                    ViewBag.Result = "ID is duplicated. Input ID again, please";
+                }
+            }
+            return RedirectToAction("Index", "Candidates");
+        }
     }
+
 }
